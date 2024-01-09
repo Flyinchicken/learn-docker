@@ -25,5 +25,10 @@ The application is based on the application from the getting started tutorial at
 ## bind mount (share a local directory into the container; development container for example, referring to the source code)
 
 1. docker run -dp HOST_PORT:PORT -w /app `
-    > > --mount type=bind,src=<local_directory_path>,target=/app <image_name> <commands_to_run_at_start_up>
+    > --mount type=bind,src=<local_directory_path>,target=/app <image_name> <commands_to_run_at_start_up>
 2. docker logs -f <container_id> (to see logs of the container)
+
+# Multi Container App
+## Container networking
+1. docker network create <network_name>
+2. docker run [optional_flags] --network <network_name> --network-alias <component_name_in_network> [-v volume_name:PATH_to_mount] [-e ENV_VAR=value] <image_name>
