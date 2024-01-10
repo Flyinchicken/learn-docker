@@ -32,3 +32,33 @@ The application is based on the application from the getting started tutorial at
 ## Container networking
 1. docker network create <network_name>
 2. docker run [optional_flags] --network <network_name> --network-alias <component_name_in_network> [-v volume_name:PATH_to_mount] [-e ENV_VAR=value] <image_name>
+
+# Multi Container App with DOcker Compose
+1. compose.yaml -> ```services:
+  app:
+    image: node:18-alpine
+    command: sh -c "yarn install && yarn run dev"
+    ports:
+      - 127.0.0.1:3000:3000
+    working_dir: /app
+    volumes:
+      - ./:/app
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: xgzf3454
+      MYSQL_DB: todos
+  mysql:
+    image: mysql:8.0
+    volumes:
+      - todo-mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: xgzf3454
+      MYSQL_DATABASE: todos
+
+
+volumes:
+  todo-mysql-data:```
+
+2. docker compose up -d
+3. docker compose logs -f [service_name]
